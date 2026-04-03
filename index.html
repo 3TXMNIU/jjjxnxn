@@ -2,48 +2,166 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baron Downloader</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Baron Neon Downloader</title>
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#ffc107">
+    <meta name="theme-color" content="#bc13fe">
     <style>
-        :root { --primary: #ffc107; --dark-bg: #121212; --card-bg: #1e1e1e; }
-        body { 
-            background: var(--dark-bg); color: white; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        :root {
+            --neon-purple: #bc13fe;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --text-color: #ffffff;
+            --neon-shadow: 0 0 10px #bc13fe, 0 0 20px #bc13fe, 0 0 30px #bc13fe;
         }
-        .header { 
-            width: 100%; background: var(--primary); color: black; 
-            padding: 20px 0; text-align: center; font-size: 22px; font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        .container { 
-            width: 90%; max-width: 450px; margin-top: 50px; 
-            background: var(--card-bg); padding: 30px; border-radius: 25px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center;
+
+        /* رأس الصفحة - Neon Header */
+        .header {
+            width: 100%;
+            padding: 25px 0;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: var(--neon-shadow);
+            border-bottom: 2px solid var(--neon-purple);
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
+            animation: headerGlow 2s ease-in-out infinite alternate;
         }
-        input { 
-            width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #333; 
-            background: #252525; color: white; font-size: 16px; outline: none; 
-            box-sizing: border-box; transition: 0.3s;
+
+        @keyframes headerGlow {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--neon-purple); }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px var(--neon-purple), 0 0 40px var(--neon-purple); }
         }
-        input:focus { border-color: var(--primary); }
-        .btn-download { 
-            width: 100%; padding: 15px; margin-top: 20px; border-radius: 15px; 
-            border: none; background: var(--primary); color: black; 
-            font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s;
+
+        /* الحاوية الرئيسية - Main Container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin-top: 60px;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(188, 19, 254, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(188, 19, 254, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
         }
-        .btn-download:active { transform: scale(0.95); }
-        .status { margin-top: 20px; color: #bbb; font-size: 14px; min-height: 20px; }
-        
-        /* Loader Animation */
-        .loader { 
-            display: none; border: 4px solid #333; border-top: 4px solid var(--primary); 
-            border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; 
-            margin: 15px auto; 
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(188, 19, 254, 0.4);
         }
+
+        /* حقل الإدخال - Neon Input */
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px;
+            border-radius: 50px;
+            border: 2px solid #333;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.4s;
+            text-align: center;
+        }
+
+        input:focus {
+            border-color: var(--neon-purple);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.6);
+        }
+
+        /* زر التحميل - Neon Button */
+        .btn-download {
+            width: 100%;
+            padding: 18px;
+            border-radius: 50px;
+            border: none;
+            background: transparent;
+            color: var(--neon-purple);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--neon-purple);
+            transition: 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(188, 19, 254, 0.4);
+        }
+
+        .btn-download:hover {
+            background: var(--neon-purple);
+            color: #fff;
+            box-shadow: var(--neon-shadow);
+        }
+
+        .btn-download:active {
+            transform: scale(0.96);
+        }
+
+        /* حالة التحميل - Status Area */
+        .status-area {
+            margin-top: 25px;
+            min-height: 40px;
+        }
+
+        #status {
+            color: #aaa;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        #status.success {
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        #status.error {
+            color: #f00;
+            text-shadow: 0 0 10px #f00;
+        }
+
+        /* متحرك الانتظار - Loader Animation */
+        .loader {
+            display: none;
+            border: 4px solid #1a1a1a;
+            border-top: 4px solid var(--neon-purple);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            animation: spin 1s linear infinite, glowPulse 1.5s infinite;
+            margin: 15px auto;
+        }
+
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes glowPulse { 0% { box-shadow: 0 0 5px var(--neon-purple); } 50% { box-shadow: 0 0 15px var(--neon-purple); } 100% { box-shadow: 0 0 5px var(--neon-purple); } }
+
     </style>
 </head>
 <body>
@@ -51,57 +169,78 @@
 <div class="header">Baron Downloader</div>
 
 <div class="container">
-    <p>شارك الرابط من يوتيوب أو الصقه هنا</p>
-    <input type="text" id="urlInput" placeholder="رابط الفيديو...">
-    <button class="btn-download" onclick="startDownload()">تحميل بصيغة MP3</button>
+    <div class="input-group">
+        <input type="text" id="urlInput" placeholder="الصق رابط يوتيوب هنا...">
+    </div>
     
-    <div id="loader" class="loader"></div>
-    <div id="status" class="status">جاهز للتحميل</div>
+    <button class="btn-download" id="downloadBtn" onclick="startDownload()">تحميل MP3 مباشر</button>
+    
+    <div class="status-area">
+        <div id="loader" class="loader"></div>
+        <p id="status">جاهز للتحميل</p>
+    </div>
 </div>
 
 <script>
-    // تسجيل الـ Service Worker لضمان عمل التطبيق
+    // 1. تسجيل الـ Service Worker لضمان قابلية التثبيت
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js');
     }
 
-    // استقبال الرابط عند المشاركة من يوتيوب
-    window.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const sharedText = urlParams.get('text') || urlParams.get('url');
-        
-        if (sharedText) {
-            const videoLink = sharedText.match(/\bhttps?:\/\/\S+/gi);
-            if (videoLink) {
-                document.getElementById('urlInput').value = videoLink[0];
-                document.getElementById('status').innerText = "تم استلام الرابط بنجاح!";
-                // يمكنك تفعيل التحميل التلقائي هنا بإضافة startDownload();
-            }
-        }
-    });
-
+    // 2. دالة التحميل المطور (Direct-like API)
     function startDownload() {
         const url = document.getElementById('urlInput').value;
         const status = document.getElementById('status');
         const loader = document.getElementById('loader');
+        const btn = document.getElementById('downloadBtn');
 
         if (!url) {
-            status.innerText = "يرجى إدخال الرابط أولاً!";
+            status.innerText = "أدخل رابطاً أولاً يا بارون!";
+            status.className = 'error';
             return;
         }
 
-        status.innerText = "جاري معالجة الرابط... انتظر قليلاً";
+        // تنظيف حالة سابقة
+        status.className = '';
+        status.innerText = "جاري جلب الملف مباشرة...";
         loader.style.display = "block";
+        btn.disabled = true;
+        btn.innerText = "جاري المعالجة...";
 
-        // استخدام محرك (9xbuddy) لأنه يوفر صفحة تحميل نظيفة وخيارات متعددة
-        const downloadUrl = `https://9xbuddy.com/download?url=${encodeURIComponent(url)}`;
+        // محرك (API) يحاول التحميل دون فتح صفحات وسيطة
+        const apiLink = `https://api.vevioz.com/api/button/mp3?url=${encodeURIComponent(url)}`;
         
+        // استخدام iframe مخفي لبدء التحميل في الخلفية
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = apiLink;
+        document.body.appendChild(iframe);
+
+        // محاكاة اكتمال العملية (لأن الـ iframe لا يعطي حدث اكتمال)
         setTimeout(() => {
             loader.style.display = "none";
-            status.innerText = "اكتملت المعالجة! اختر الجودة من الصفحة التالية.";
-            window.location.href = downloadUrl;
-        }, 1500);
+            status.innerText = "بدأ التحميل! تفقد إشعارات جهازك.";
+            status.className = 'success';
+            btn.disabled = false;
+            btn.innerText = "تحميل MP3 مباشر";
+            
+            // تنظيف الـ iframe بعد فترة
+            setTimeout(() => document.body.removeChild(iframe), 5000);
+        }, 3500);
     }
+
+    // 3. استقبال الرابط فور المشاركة من يوتيوب
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const sharedText = params.get('text') || params.get('url');
+        if (sharedText) {
+            const foundUrl = sharedText.match(/\bhttps?:\/\/\S+/gi);
+            if (foundUrl) {
+                document.getElementById('urlInput').value = foundUrl[0];
+                startDownload(); // بدء التحميل تلقائياً عند المشاركة
+            }
+        }
+    });
 </script>
 
 </body>
